@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Word Predictor</title>
+    </head>
+    <body>
+            <form method="POST">
+                <label for="sentence">Enter a sentence:</label>
+                <input type="text" id="sentence" name="sentence">
+                <button type="submit">Submit</button>
+            </form>
+            
+            {% if sentence %}
+            <p>Predicted word: {{ predicted_word }}</p>
+            <!-- Display attention diagrams here -->
+            {% endif %}
+    </body>
+
+</html>
