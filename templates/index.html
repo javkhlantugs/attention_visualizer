@@ -12,8 +12,11 @@
             </form>
             
             {% if sentence %}
-            <p>Predicted word: {{ predicted_word }}</p>
-            <!-- Display attention diagrams here -->
+                {% for sentence in generated_sentences %}
+                    <p>Predicted sentence: {{ sentence }}</p>
+                {% endfor %}
+
+                
             {% endif %}
     </body>
 
