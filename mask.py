@@ -16,7 +16,7 @@ GRID_SIZE = 40
 PIXELS_PER_WORD = 200
 
 
-def generate(sentence):
+def generate(sentence, session_id):
     text = sentence
 
     # Tokenize input
@@ -39,7 +39,7 @@ def generate(sentence):
         sentences.append(text.replace(tokenizer.mask_token, tokenizer.decode([token])))
 
     # Visualize attentions
-    # visualize_attentions(inputs.tokens(), result.attentions)
+    visualize_attentions(inputs.tokens(), result.attentions, session_id)
     return sentences
 
 
@@ -63,7 +63,7 @@ def get_color_for_attention_score(attention_score):
     rgb = int(attention_score * 255)
     return (rgb, rgb, rgb)
 
-def visualize_attentions(tokens, attentions):
+def visualize_attentions(tokens, attentions, session_id):
     """
     Produce a graphical representation of self-attention scores.
 
@@ -77,10 +77,10 @@ def visualize_attentions(tokens, attentions):
     for i, layer in enumerate(attentions):
         beam = layer[0]
         for j, head in enumerate(beam):
-            generate_diagram(i+1, j+1, tokens, head)
+            generate_diagram(i+1, j+1, tokens, head, session_id)
     # print(len(attentions[0][0]))
 
-def generate_diagram(layer_number, head_number, tokens, attention_weights):
+def generate_diagram(layer_number, head_number, tokens, attention_weights, session_id):
     """
     Generate a diagram representing the self-attention scores for a single
     attention head. The diagram shows one row and column for each of the
@@ -127,5 +127,5 @@ def generate_diagram(layer_number, head_number, tokens, attention_weights):
             draw.rectangle((x, y, x + GRID_SIZE, y + GRID_SIZE), fill=color)
 
     # Save image
-    img.save(f"Attention_Layer{layer_number}_Head{head_number}.png")
+    img.save(f"static/img/{session_id}/{layer_number}_{head_number}.png")
 
