@@ -7,3 +7,6 @@ __pycache__/
 # Dependency folders
 *.egg-info/
 dist/
+
+# static img folder
+static/img
