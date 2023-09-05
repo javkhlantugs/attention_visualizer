@@ -1,25 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Word Predictor</title>
-    </head>
-    <body>
-            <h1>Session ID: {{ session['new_session_id'] }}</h1>
-            <form method="POST">
-                <label for="sentence">Enter a sentence:</label>
-                <input type="text" id="sentence" name="sentence">
-                <button type="submit">Submit</button>
-            </form>
-            
-            {% if sentence %}
-                {% for sentence in generated_sentences %}
-                    <p>Predicted sentence: {{ sentence }}</p>
-                {% endfor %}
-
-                
-            {% endif %}
-            <img src="{{ url_for('static', filename='img/' + session['new_session_id'] + '/1_1.png') }}" alt="">
-    </body>
-
-</html>
+{% extends "base.html" %}
+{% block content %}
+    <h1>Session ID: {{ session['new_session_id'] }}</h1>
+        <form method="POST">
+            <label for="sentence">Enter a sentence:</label>
+            <input type="text" id="sentence" name="sentence">
+            <button type="submit">Submit</button>
+        </form>
+{% endblock %}
+```

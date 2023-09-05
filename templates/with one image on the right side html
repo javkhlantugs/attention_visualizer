@@ -1,0 +1,17 @@
+          <div class="list-group">
+          {% for i in range(1,13) %}
+              <button class="btn btn-primary list-group-item list-group-item-action" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample{{ i }}"
+                  aria-expanded="false" aria-controls="collapseExample{{i}}">
+                  Layer {{ i }}
+              </button>
+              <div class="list-group collapse" id="collapseExample{{i}}">
+                  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                      The current link item
+                  </a>
+                  <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+                 <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+                 <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+                  <a class="list-group-item list-group-item-action disabled" aria-disabled="true">A disabled link item</a>
+              </div>
+          {% endfor %}
+          </div>

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Session ID: {{ session['new_session_id'] }}</h1>
+  <div class="row">
+      {% if sentence %}
+          {% for sentence in generated_sentences %}
+              <p>Predicted sentence: {{ sentence }}</p>
+          {% endfor %}
+      {% endif %}
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              Layers and attention heads
+            </h4>
+          </div>
+          <div class="panel-body">
+            <div class="accordion" id="accordionExample">
+              {% for layer in range(0, 12) %}
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="heading{{ layer }}">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ layer }}" aria-expanded="true" aria-controls="collapse{{ layer }}">
+                      Layer {{ layer }}
+                    </button>
+                  </h2>
+                  <div id="collapse{{ layer }}" class="accordion-collapse collapse show" aria-labelledby="heading{{ layer }}" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <div class="row">
+                        {% for head in range(0, 12) %}
+                          <div class="col">
+                            <img src="https://picsum.photos/200" alt="">
+                          </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <img src="https://picsum.photos/200" alt="">
+    </div>
+  </div>
+<script>
+  var myCollapse = document.getElementById('collapseExample')
+  var bsCollapse = new bootstrap.Collapse(myCollapse)
+
+</script>
+{% endblock %}
