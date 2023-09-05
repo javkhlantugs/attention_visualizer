@@ -1,3 +1,4 @@
+import os
 import sys
 import tensorflow as tf
 
@@ -76,11 +77,12 @@ def visualize_attentions(tokens, attentions, session_id):
     
     for i, layer in enumerate(attentions):
         beam = layer[0]
+        os.makedirs(f"static/img/{session_id}/{i+1}", exist_ok=True)
         for j, head in enumerate(beam):
             generate_diagram(i+1, j+1, tokens, head, session_id)
     # print(len(attentions[0][0]))
 
-def generate_diagram(layer_number, head_number, tokens, attention_weights, session_id):
+def generate_diagram(layer_number, head_number, tokens, attention_weights, session_id,):
     """
     Generate a diagram representing the self-attention scores for a single
     attention head. The diagram shows one row and column for each of the
@@ -127,5 +129,5 @@ def generate_diagram(layer_number, head_number, tokens, attention_weights, sessi
             draw.rectangle((x, y, x + GRID_SIZE, y + GRID_SIZE), fill=color)
 
     # Save image
-    img.save(f"static/img/{session_id}/{layer_number}_{head_number}.png")
+    img.save(f"static/img/{session_id}/{layer_number}/{head_number}.png")
 
