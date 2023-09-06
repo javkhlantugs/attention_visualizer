@@ -31,7 +31,12 @@
                       <div class="row">
                         {% for head in range(1, 13) %}
                           <div class="col">
-                            <img src="{{ f'static/img/{session_id}/{layer}/{head}.png' }}" alt="">
+                            <div class="card">
+                              <h5 class="card-header">Head {{ head }}</h5>
+                              <div class="card-body">
+                              <img src="{{ attention_diagrams ~ '/' ~ layer ~ '/' ~ head ~ '.png' }}" alt="">
+                            </div>
+                            </div>
                           </div>
                         {% endfor %}
                       </div>
@@ -42,9 +47,6 @@
             </div>
         </div>
       </div>
-    </div>
-    <div class="col">
-      <img src="https://picsum.photos/200" alt="">
     </div>
   </div>
 <script>

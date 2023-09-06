@@ -1,10 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Session ID: {{ session['new_session_id'] }}</h1>
-        <form method="POST">
-            <label for="sentence">Enter a sentence:</label>
-            <input type="text" id="sentence" name="sentence">
-            <button type="submit">Submit</button>
+<div class="container" style="height: 100vh;">
+        <div class="row justify-content-md-center align-middle" style="height: 100vh;">
+        <div class="col-8 align-self-center">
+            <form method="POST">
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control" placeholder="A sentence with a [MASK] word"
+                    aria-label="Recipient's username with two button addons">
+                <button class="btn btn-outline-secondary" type="button">Button</button>
+                <button class="btn btn-outline-secondary" type="button submit">Submit</button>
+            </div>
         </form>
+        </div>
+    </div>
+    </div>
+
 {% endblock %}
 ```
