@@ -6,6 +6,11 @@ from mask import *
 app = Flask(__name__)
 app.secret_key = os.urandom(24).hex()  # Set your secret key for session management
 
+# Check and print the FLASK_ENV value
+flask_env = os.environ.get('FLASK_ENV')
+if flask_env is not None:
+    print(f'FLASK_ENV is set to: {flask_env}')
+
 @app.before_request
 def before_request():
     if 'new_session_id' not in session:
