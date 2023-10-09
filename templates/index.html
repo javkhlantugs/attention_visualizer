@@ -1,15 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container" style="height: 100vh;">
-        <div class="row justify-content-md-center align-middle" style="height: 100vh;">
-        <div class="col-8 align-self-center">
-            <form method="POST">
-            <div class="input-group input-group-lg">
-                <input type="text" class="form-control" placeholder="A sentence with a [MASK] word"
-                    aria-label="Recipient's username with two button addons">
-                <button class="btn btn-outline-secondary" type="button">Button</button>
-                <button class="btn btn-outline-secondary" type="button submit">Submit</button>
+<div class="grid row-gap-3" style="height: 100vh;">
+        <div class="row align-items-center justify-content-md-center" style="height:50vh">
+            <div class="col-9 align-middle">
+                <p class="fs-1 fw-bold text-center">Let's use Google's BERT model and Hugging Face's transformers library to predict a masked
+                            word within a sentence</p>
             </div>
+
+        </div>
+        <div class="row justify-content-md-center align-items-start" style="height: 50vh;">
+
+            <div class="col-9">
+                <form method="POST">
+                <div class="input-group input-group-lg">
+                    <input id="sentence" name="sentence" type="text" class="form-control" placeholder="A sentence with a [MASK] word"
+                        aria-label="Recipient's username with two button addons">
+                    <button class="btn btn-outline-secondary" type="button">Button</button>
+                    <button class="btn btn-outline-secondary" type="button submit">Submit</button>
+                </div>
+
+                <h3 class="mt-3">Steps</h3>
+                    <ol class="list-group">
+                        <li class="list-group-item" style="border: none">1. Type a sentence</li>
+                        <li class="list-group-item" style="border: none">2. Click on a word you'd like to mask or simply type [MASK] instead of the word</li>
+                        <li class="list-group-item" style="border: none">3. Click Submit</li>
+                    </ol>
         </form>
         </div>
     </div>
