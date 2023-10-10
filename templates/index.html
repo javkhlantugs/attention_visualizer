@@ -15,9 +15,11 @@
                 <div class="input-group input-group-lg">
                     <input id="sentence" name="sentence" type="text" class="form-control" placeholder="A sentence with a [MASK] word"
                         aria-label="Recipient's username with two button addons">
-                    <button class="btn btn-outline-secondary" type="button">Button</button>
+                    <button class="btn btn-outline-secondary" type="button" onClick="createWordButtons()">Tokenize</button>
                     <button class="btn btn-outline-secondary" type="button submit">Submit</button>
                 </div>
+                </form>
+                <div id="wordButtons"></div>
 
                 <h3 class="mt-3">Steps</h3>
                     <ol class="list-group">
@@ -25,10 +27,79 @@
                         <li class="list-group-item" style="border: none">2. Click on a word you'd like to mask or simply type [MASK] instead of the word</li>
                         <li class="list-group-item" style="border: none">3. Click Submit</li>
                     </ol>
-        </form>
         </div>
     </div>
     </div>
+<script>
+     // Declare a global variable to store the original input sentence
+    let wordsArray = [];
 
+    function createWordButtons() {
+            const inputSentence = document.getElementById("sentence").value;
+            wordsArray = inputSentence.split(" ");
+            const wordButtonsContainer = document.getElementById("wordButtons");
+
+            // Clear previous content in the wordButtonsContainer
+            wordButtonsContainer.innerHTML = "";
+
+            wordsArray.forEach((word) => {
+                const wordButton = document.createElement("button");
+                wordButton.textContent = word;
+
+                // Add a click event listener to each word button
+                wordButton.addEventListener("click", () => {
+                    // Handle the click event (e.g., show an alert)
+                    maskWord(word);
+                });
+
+                // Append the word button to the container
+                wordButtonsContainer.appendChild(wordButton);
+            });
+        }
+
+        function maskWord(clickedWord){
+            // Find the index of the clicked word in the global wordsArray
+            const index = wordsArray.indexOf(clickedWord);
+
+            if (index !== -1) {
+                // Replace the clicked word with "[MASK]"
+                wordsArray[index] = "[MASK]";
+            }
+
+            // Display the updated sentence
+            const updatedSentence = wordsArray.join(" ");
+            console.log("Updated Sentence:", updatedSentence);
+
+            // Send the updatedSentence to the Flask backend
+            sendToBackend(updatedSentence);
+        }
+
+        function sendToBackend(updatedSentence) {
+                // Define the URL of your Flask backend
+                const apiUrl = "http://127.0.0.1:5000/api";
+
+                // Define the data to send in the POST request
+                const data = { updatedSentence };
+
+                // Define the options for the fetch request
+                const requestOptions = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                };
+
+                // Send the POST request to the Flask backend
+                 fetch(apiUrl, requestOptions)
+                    .then(() => {
+                        // The request is sent, and you don't need to process the response
+                        console.log("POST request sent to Flask backend.");
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                    });
+            }
+</script>
 {% endblock %}
 ```
