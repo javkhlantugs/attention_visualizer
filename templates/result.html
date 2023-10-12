@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Session ID: {{ session['new_session_id'] }}</h1>
   <div class="row">
       {% if sentence %}
           {% for sentence in generated_sentences %}
