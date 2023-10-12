@@ -96,6 +96,11 @@
                         // The request is sent, and you don't need to process the response
                         console.log("POST request sent to Flask backend.");
                     })
+                    .then(data => {
+                         console.log("Loading result:");
+                         window.location.href = "/result"; // Ensure this line is correct
+                     })
+
                     .catch(error => {
                         console.error("Error:", error);
                     });
