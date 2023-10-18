@@ -1,22 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
+<div id="loading">
+    <img id="loading-image" src="{{ url_for('static', filename='images/Settings.gif') }}" alt="Loading..." />
+</div>
 <div class="grid row-gap-3" style="height: 100vh;">
         <div class="row align-items-center justify-content-md-center" style="height:50vh">
-            <div class="col-9 align-middle">
+            <div class="align-middle">
                 <p class="fs-1 fw-bold text-center">Let's use Google's BERT model and Hugging Face's transformers library to predict a masked
                             word within a sentence</p>
             </div>
 
         </div>
-        <div class="row justify-content-md-center align-items-start" style="height: 50vh;">
+        <div class="row justify-content-md-center align-items-start">
 
-            <div class="col-9">
+            <div class="">
                 <div class="input-group input-group-lg">
                     <input id="sentence" name="sentence" type="text" class="form-control" placeholder="Type a sentence"
                         aria-label="Recipient's username with two button addons">
                     <button id="generateButton" class="btn btn-outline-secondary" type="button">Tokenize</button>
                 </div>
-                <div id="wordButtons"></div>
+                <div id="wordButtons" class="btn-group mt-2"></div>
 
                 <h3 class="mt-3">Steps</h3>
                     <ol class="list-group">
@@ -26,9 +29,50 @@
         </div>
     </div>
     </div>
+    <div class="row align-items-center justify-content-md-center" style="height: 100vh">
+        <p class="fs-4">
+        One way to create language models is to build a Masked Language Model, where a language model is trained to predict a
+        “masked” word that is missing from a sequence of text. BERT is a transformer-based language model developed by Google,
+        and it was trained with this approach: the language model was trained to predict a masked word based on the surrounding
+        context words.
+        </p>
+        <p class="fs-4">
+            One way to create language models is to build a Masked Language Model, where a language model is trained to predict
+            a
+            “masked” word that is missing from a sequence of text. BERT is a transformer-based language model developed by
+            Google,
+            and it was trained with this approach: the language model was trained to predict a masked word based on the
+            surrounding
+            context words.
+        </p>
+        <p class="fs-4">
+            After submitting your sentence with a hidden word, the result page will show two things:
+        </p>
+        <ul class="fs-4 fw-bold">
+            <li>Three complete sentences with predicted words with the highest ranks.</li>
+            <li>diagrams visualizing attention scores, with one diagram generated for each of the 144 attention heads.</li>
+        </ul>
+</div>
 <script>
      // Declare a global variable to store the original input sentence
     let wordsArray = [];
+
+
+    //function that loads the loader circle gif when one of the word buttons are clicked
+    $(document).ready(function () {
+            console.log("loading circle loader function working")
+            // Attach a click event handler to a parent element containing the buttons
+            $(document).on('click', '.loading-circle', function () {
+                // Show the loading element when any button is clicked
+                $('#loading').show();
+
+                // Perform any additional actions or navigate to the next page here
+            });
+        });
+
+    //function that hides the loading cirle gif after a page loads    
+    $(window).on('load', function () { $('#loading').hide(); })
+
 
     document.addEventListener("DOMContentLoaded", function () {
             // Find the button element by its ID
@@ -57,6 +101,11 @@
                 const wordButton = document.createElement("button");
                 wordButton.textContent = word;
 
+                //// Add a class to the button for the purpose of triggering loading page while js sends API data to the backend
+                wordButton.classList.add("btn");
+                wordButton.classList.add("btn-outline-dark")
+                wordButton.classList.add("loading-circle")
+                wordButton.type = "button"
                 // Add a click event listener to each word button
                 wordButton.addEventListener("click", () => {
                     // Handle the click event (e.g., show an alert)
