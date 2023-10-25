@@ -1,6 +1,6 @@
-from flask import Flask, request, jsonify, redirect, url_for, render_template, session
 import os
 import uuid
+from flask import Flask, request, jsonify, redirect, url_for, render_template, session
 from mask import *
 
 app = Flask(__name__)
