@@ -1,8 +1,8 @@
-Python==3.11.4
+Python==3.11.6
 Flask==2.3.3
 Werkzeug == 2.3.7
 pillow==10.0.0
-tensorflow-cpu
+tensorflow-cpu==2.14.0
 transformers
 gunicorn==21.2.0
 certifi==2023.7.22
