@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="row">
+    <h4 class="panel-title">
+      Predicted Sentences
+    </h4>
+    <ul>
+      {% if sentence %}
+          {% for sentence in generated_sentences %}
+              <li>{{ sentence }}</li>
+          {% endfor %}
+      {% endif %}
+    </ul>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              Layers and attention heads
+            </h4>
+          </div>
+          <div class="panel-body">
+            <div class="accordion" id="accordionExample">
+              {% for layer in range(1, 13) %}
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="heading{{ layer }}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ layer }}" aria-expanded="false" aria-controls="collapse{{ layer }}">
+                      Layer {{ layer }}
+                    </button>
+                  </h2>
+                  <div id="collapse{{ layer }}" class="accordion-collapse collapse" aria-labelledby="heading{{ layer }}" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <div class="row">
+                        {% for head in range(1, 13) %}
+                          <div class="col">
+                            <div class="card">
+                              <h5 class="card-header">Head {{ head }}</h5>
+                              <div class="card-body">
+                              <img src="{{ attention_diagrams ~ '/' ~ layer ~ '/' ~ head ~ '.png' }}" alt="">
+                            </div>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+  var myCollapse = document.getElementById('collapseExample')
+  var bsCollapse = new bootstrap.Collapse(myCollapse)
+
+</script>
+{% endblock %}

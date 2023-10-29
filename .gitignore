@@ -10,3 +10,7 @@ dist/
 
 # static img folder
 static/img
+
+#DS_store
+.DS_Store
+static/.DS_Store
